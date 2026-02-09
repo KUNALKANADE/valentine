@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+audio{display:none}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#ffe4ec,#ffd1e3,#ffc0d9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  font-family:Georgia,serif;
+  color:#5a2a3a;
+}
+
+/* CARD */
+.card{
+  position:relative;
+  z-index:5;
+  background:rgba(255,245,250,.97);
+  padding:30px 26px;
+  border-radius:20px;
+  max-width:420px;
+  width:90%;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(255,120,170,.35);
+  animation:fade 1.2s ease;
+  max-height:85vh;
+  overflow:hidden;
+}
+.hidden{display:none}
+
+h1{font-size:1.9rem;margin-bottom:15px;}
+p{font-size:1rem;line-height:1.6;margin:8px 0}
+
+/* BUTTONS */
+.buttons{
+  margin-top:25px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+button{
+  padding:12px 28px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-size:1rem;
+  transition:.3s ease;
+}
+
+.yes{
+  background:linear-gradient(135deg,#ff7eb3,#ff4f93);
+  color:#fff;
+  box-shadow:0 15px 35px rgba(255,79,147,.45);
+}
+.yes:hover{transform:scale(1.15)}
+
+.no{
+  background:#ffe1ec;
+  color:#8a3a5a;
+}
+
+/* LETTER */
+.letter{
+  background:#fff0f6;
+  padding:22px;
+  border-radius:14px;
+  box-shadow:inset 0 0 0 3px #ffb6d5;
+  font-family:'Pacifico',cursive;
+  text-align:left;
+  max-height:70vh;
+  overflow-y:auto;
+}
+
+.letter::-webkit-scrollbar{
+  width:5px;
+}
+.letter::-webkit-scrollbar-thumb{
+  background:#ff7eb3;
+  border-radius:10px;
+}
+
+.letter h2{text-align:center;margin-bottom:12px}
+
+/* POLAROIDS */
+.photo-gallery{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+}
+.polaroid{
+  position:absolute;
+  width:120px;
+  background:#fff;
+  padding:10px 10px 22px;
+  box-shadow:0 15px 30px rgba(0,0,0,.25);
+  border-radius:4px;
+  opacity:0;
+  animation:pop 1.4s ease forwards;
+}
+.polaroid img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+}
+.polaroid span{
+  display:block;
+  text-align:center;
+  margin-top:6px;
+  font-family:'Pacifico',cursive;
+  color:#c2185b;
+}
+
+.p1{top:5%;left:5%;transform:rotate(-10deg)}
+.p2{top:7%;right:6%;transform:rotate(8deg)}
+.p3{bottom:10%;left:10%;transform:rotate(6deg)}
+.p4{bottom:8%;right:10%;transform:rotate(-8deg)}
+.p5{top:42%;left:2%;transform:rotate(4deg)}
+.p6{top:42%;right:2%;transform:rotate(-4deg)}
+
+@media(max-width:600px){
+  .polaroid{width:90px}
+  h1{font-size:1.6rem;}
+  p{font-size:0.95rem;}
+  button{padding:10px 20px;font-size:0.9rem;}
+}
+
+/* HEARTS + PETALS */
+.heart, .petal{
+  position:fixed;
+  font-size:22px;
+  pointer-events:none;
+  opacity:0.8;
+  animation:floatUp linear forwards;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  bottom:20%;
+  background:#fff;
+  padding:12px 18px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  font-family:'Pacifico',cursive;
+  animation:fade 1s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1}
+}
+@keyframes pop{
+  from{opacity:0;transform:scale(.5)}
+  to{opacity:1}
+}
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:0}
+  10%{opacity:0.9}
+  100%{transform:translateY(-120vh) rotate(360deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="questionCard">
+  <h1>Gopuuu Will you be my Valentine? 💖</h1>
+  <p>One click… and this turns into a love story worth rewatching forever.</p>
+  <div class="buttons">
+    <button class="yes" id="yesBtn" onclick="showYes()">Yes ❤️</button>
+    <button class="no" onclick="showNo()">No 😅</button>
+  </div>
+</div>
+
+<div class="card hidden" id="yesCard">
+  <div class="letter">
+    <h2>My Forever Valentine ♥️</h2>
+    <p>This Valentine’s, I just want to pause everything and tell you what my heart feels every single day…</p>
+    <p>You walked into my life so quietly, and somehow became the loudest happiness in it. With you, even ordinary moments feel special — your smile, your voice, the way you understand me without me saying much.</p>
+    <p>You make me feel calm, safe, and deeply loved, and that’s the most beautiful feeling in the world.</p>
+    <p>I love how you make me want to be a better person, not because you ask me to, but because loving you makes me want to grow…</p>
+    <p>No matter where we are, near or far, my heart always finds its way back to you.</p>
+    <p>I can’t wait to create a lifetime of memories with you — laughing, traveling, building dreams, and holding each other through everything.</p>
+    <p>Thank you for choosing me, for loving me, and for being you.</p>
+    <p>Today, tomorrow, and always — you are my Valentine! 💕</p>
+    <p>With all my love ❤️<br>— Abhishek</p>
+  </div>
+</div>
+
+<!-- POLAROIDS --> <div class="photo-gallery hidden" id="photoGallery"> <div class="polaroid p1"><img src="WhatsApp Image 2026-02-07 at 5.22.42 PM (2).jpeg"><span>Us 💕</span></div> <div class="polaroid p2"><img src="WhatsApp Image 2026-02-07 at 5.22.43 PM (1).jpeg"><span>That smile</span></div> <div class="polaroid p3"><img src="WhatsApp Image 2026-02-07 at 5.22.42 PM (1).jpeg"><span>Forever</span></div> <div class="polaroid p4"><img src="WhatsApp Image 2026-02-07 at 5.25.30 PM.jpeg"><span>My fav</span></div> <div class="polaroid p5"><img src="WhatsApp Image 2026-02-07 at 5.25.31 PM.jpeg"><span>Always</span></div> <div class="polaroid p6"><img src="WhatsApp Image 2026-02-07 at 5.22.42 PM.jpeg"><span>Just Us</span></div> </div>
+
+<script>
+let noCount=0;
+const cuteMsgs=["Are you sure? 🥺","Think again 😏","Destiny says NO to NO 💕","Okay last chance… 😘"];
+
+function showYes(){
+  questionCard.classList.add("hidden");
+  yesCard.classList.remove("hidden");
+  photoGallery.classList.remove("hidden");
+
+  bgMusic.currentTime=30;
+  bgMusic.play();
+
+  if(!window.petalInterval){
+    window.petalInterval=setInterval(spawnPetal,350);
+  }
+}
+
+function spawnPetal(){
+  const p=document.createElement("div");
+  p.className="petal";
+  p.innerText="🌹";
+  p.style.left=Math.random()*100+"vw";
+  p.style.fontSize=(18+Math.random()*14)+"px";
+  p.style.animationDuration=(8+Math.random()*5)+"s";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),16000);
+}
+
+function showNo(){
+  noCount++;
+  yesBtn.style.transform=`scale(${1+noCount*0.3})`;
+
+  let pop=document.createElement("div");
+  pop.className="popup";
+  pop.innerText=cuteMsgs[Math.min(noCount-1,cuteMsgs.length-1)];
+  document.body.appendChild(pop);
+  setTimeout(()=>pop.remove(),1500);
+
+  if(noCount>=4){
+    document.querySelector(".no").style.display="none";
+  }
+}
+
+/* HEART RAIN */
+function spawnHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="💕";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(16+Math.random()*16)+"px";
+  h.style.animationDuration=(7+Math.random()*6)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),14000);
+}
+
+setInterval(spawnHeart,500);
+</script>
+
+</body>
+</html>
